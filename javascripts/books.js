@@ -1,57 +1,63 @@
 function handleResponse(response) {
   console.log(response.items);
 
-
   _.each(response.items, function(book) {
 
-    var img_url = book.volumeInfo.imageLinks.thumbnail;
+    // var img_url = book.volumeInfo.imageLinks.thumbnail;
+    // var img_title = book.volumeInfo.title;
+
+    new Book(book).add_to_bookshelf();
+
+    // var averageRating = book.volumeInfo.averageRating;
+
+    
+
+  });
+
+}
+
+function hello() {
+    var val = document.getElementById("search").value;
+    var findByTitle = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+    alert(val);
+}
+
+"We' ll call this constructor"
+
+function Book(book_info) {
+  this.image_url = book_info.volumeInfo.imageLinks.thumbnail;
+  this.title = book_info.volumeInfo.title;
+  this.rating = book_info.volumeInfo.averageRating;
+}
+
+
+Book.prototype.add_to_bookshelf = function(){
+
     var bookCon = document.getElementById('bookshelf');
     var image = document.createElement("img");
-    
+
     var container = document.createElement("div");
     container.setAttribute('class',"wrapper");
 
     var star = document.createElement("div");
     star.setAttribute("class","hot");
     var starImage = document.createElement("img");
-    
+
     starImage.src = "img/star.png";
 
-    var averageRating = book.volumeInfo.averageRating;
-
-    if (averageRating >= 4){
+    if (this.rating >= 4){
       star.appendChild(starImage);
     }
 
-    image.setAttribute('src',img_url);
+    image.setAttribute('src',this.image_url);
+
+
     container.appendChild(image);
     container.appendChild(star);
 
     bookCon.appendChild(container);
 
-  });
-
 }
-
-
-"We' ll call this constructor"
-
-// function Book(book_info) {
-//   this.image_url = book_info.volumeInfo.imageLinks.thumbnail;
-//   this.title = book_info.volumeInfo.title;
-//   this.rating = book.volumeInfo.averageRating;
-// }
-
-
-// Book.prototype.add_to_bookshelf = function(){
-
-//   var image = $("img");
-//   image.attr("src")
-
-
-// }
-
-
 
 
 
