@@ -13,10 +13,10 @@ function handleResponse(response,title) {
   _.each(response.items, function(book) {
     var book = new Book(book);
     bookTitle = book.title.toLowerCase();
-    if (title!==null && book.title.toLowerCase() === title){
+    if (title != null && book.title.toLowerCase() == title){
       book.add_to_bookshelf();
     }
-    else if(title==null){
+    else if(title == null || title == ""){
       book.add_to_bookshelf();
     }
   });
