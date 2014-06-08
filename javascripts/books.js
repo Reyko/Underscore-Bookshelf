@@ -3,14 +3,7 @@ function handleResponse(response) {
 
   _.each(response.items, function(book) {
 
-    // var img_url = book.volumeInfo.imageLinks.thumbnail;
-    // var img_title = book.volumeInfo.title;
-
     new Book(book).add_to_bookshelf();
-
-    // var averageRating = book.volumeInfo.averageRating;
-
-    
 
   });
 
@@ -45,20 +38,18 @@ Book.prototype.add_to_bookshelf = function(){
 
     starImage.src = "img/star.png";
 
-    if (this.rating >= 4){
-      star.appendChild(starImage);
-    }
+    _.filter([this.rating], function(num){ if (num > 3){ return star.appendChild(starImage);}});
+      
+   
 
     image.setAttribute('src',this.image_url);
 
 
     container.appendChild(image);
     container.appendChild(star);
-
     bookCon.appendChild(container);
 
 }
-
 
 
 
